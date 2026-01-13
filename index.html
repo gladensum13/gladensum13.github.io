@@ -1,11 +1,155 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Test</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050607" />
+  <title>GladenSum</title>
+  <meta name="description" content="GladenSum Capital Management — Scarcity. Adaptability. Resilience." />
+  <style>
+    :root{
+      --bg:#050607;
+      --fg:rgba(233,230,222,.92);
+      --muted:rgba(233,230,222,.65);
+      --line:rgba(233,230,222,.12);
+      --glow:rgba(255,240,190,.18);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      overflow-x:hidden;
+    }
+
+    /* subtle briefcase-like glow */
+    .glow{
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(420px 260px at var(--x,50%) var(--y,45%),
+          var(--glow), transparent 70%);
+      filter: blur(8px);
+      opacity:.9;
+      mix-blend-mode: screen;
+    }
+
+    /* faint grid */
+    .grid{
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(to right, var(--line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+      background-size: 96px 96px;
+      opacity:.14;
+      mask-image: radial-gradient(700px 500px at 50% 45%, black 55%, transparent 100%);
+    }
+
+    main{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:56px 18px;
+    }
+
+    .panel{
+      width:min(760px, 92vw);
+      border:1px solid rgba(233,230,222,.14);
+      border-radius:18px;
+      padding:32px 26px;
+      background: rgba(5,6,7,.35);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 40px 120px rgba(0,0,0,.55);
+    }
+
+    h1{
+      margin:0;
+      font-size:28px;
+      letter-spacing:2.2px;
+      text-transform:uppercase;
+      font-weight:560;
+    }
+    .sub{
+      margin-top:8px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      font-size:12px;
+      color: var(--muted);
+    }
+
+    .rule{
+      height:1px;
+      background: rgba(233,230,222,.12);
+      margin:18px 0;
+    }
+
+    p{
+      margin:0 0 12px 0;
+      font-size:17px;
+      line-height:1.7;
+    }
+    .muted{color:var(--muted)}
+    footer{
+      margin-top:18px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-size:12px;
+      color: rgba(233,230,222,.55);
+    }
+  </style>
 </head>
+
 <body>
-  <h1>GladenSum</h1>
-  <p>Scarcity driven philosphy</p>
+  <div class="glow" id="glow"></div>
+  <div class="grid" aria-hidden="true"></div>
+
+  <main>
+    <section class="panel" aria-label="GladenSum">
+      <h1>GladenSum</h1>
+      <div class="sub">Capital Management</div>
+
+	<div class="rule"></div>
+
+	<h2 class="muted" style="margin:0 0 10px 0; font-size:13px; letter-spacing:2px; text-transform:uppercase;">
+	  Scarcity as Signal
+	</h2>
+
+	<p>
+	  At GladenSum, scarcity is not a constraint—it is an instrument.
+	  Focus sharpens when excess is removed.
+	  Adaptability emerges when certainty dissolves.
+	</p>
+
+	<p class="muted">
+	  We operate where mathematics becomes philosophy:
+	  a language not of prediction, but of perception.
+	</p>
+
+	<div class="rule"></div>
+
+
+      <footer>
+        <div>© <span id="y"></span> GladenSum</div>
+        <div class="muted">www.gladensum.com</div>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    // Subtle glow follows the pointer; stays centered on touch devices.
+    const root = document.documentElement;
+    const setPos = (x,y)=>{ root.style.setProperty('--x', x+'px'); root.style.setProperty('--y', y+'px'); };
+    setPos(innerWidth*0.5, innerHeight*0.45);
+    addEventListener('pointermove', e => setPos(e.clientX, e.clientY), {passive:true});
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
